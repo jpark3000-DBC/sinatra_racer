@@ -7,3 +7,46 @@
 th {
   text-align: left;
 }
+
+#speedway {
+  padding: 50px;
+  color: blue;
+  width: 50%;
+  border: solid 1px;
+}
+
+#player1_strip {
+  display:block;
+  padding: 0px;
+  height: 20px;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
+#player2_strip {
+  display: block;
+}
+
+.spot {
+  border: solid 1px;
+
+  padding-right: 14px;
+  width: 5%;
+  display: inline;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
+.spot2 {
+  border: solid 1px;
+
+  padding-right: 14px;
+  width: 5%;
+  display: inline;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
+.active {
+  background-color: red;
+}
