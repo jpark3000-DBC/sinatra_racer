@@ -16,8 +16,9 @@ $(document).ready(function() {
 
   restart();
 
-  // console.log(items);
-  // var play = function() {
+  var t0 = new Date().getTime()
+
+
   $(window).keyup(function(e) {
       var old = items.filter('.active');
       var current;
@@ -31,10 +32,13 @@ $(document).ready(function() {
           current.addClass('active');
 
         if ( items.last().hasClass( "active" ) ) {
+          var t1 = new Date().getTime();
+          var time = Math.floor((t1-t0)/1000);
+          // console.log(time);
           window.alert(p1Name + " is triumphant");
-          $.post('/log_winner', {p1: p1Name, p2: p2Name, winner: p1Name})
+          $.post('/log_winner', {p1: p1Name, p2: p2Name, winner: p1Name, time: time})
             .done(function( gameId ) {
-              console.log(gameId)
+              // console.log(gameId)
               window.location.href="/results?game_id=" + gameId;
           });
         }; // end inner if
@@ -49,9 +53,13 @@ $(document).ready(function() {
           current2.addClass('active');
 
         if ( items2.last().hasClass( "active" ) ) {
+          var t1 = new Date().getTime();
+          var time = Math.floor((t1-t0)/1000);
+          // console.log(time);
           window.alert(p2Name + " is triumphant");
-          $.post('/log_winner', {p1: p1Name, p2: p2Name, winner: p2Name}).done(function(){
-            window.location.href="/results";
+          $.post('/log_winner', {p1: p1Name, p2: p2Name, winner: p2Name, time: time})
+            .done(function( gameId ) {
+              window.location.href="/results?game_id=" + gameId;
           });
         }; // end inner
       }; // end outer

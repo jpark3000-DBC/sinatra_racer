@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration
       t.integer :player1_id
       t.integer :player2_id
       t.integer :winner_id
-      t.string :game_time
+      t.integer :game_time
       t.timestamps
     end
   end

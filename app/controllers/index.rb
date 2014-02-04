@@ -4,8 +4,8 @@ get '/' do
 end
 
 post '/create_players' do
-  p1 = Player.create(name: params[:player1])
-  p2 = Player.create(name: params[:player2])
+  p1 = Player.find_or_create_by(name: params[:player1])
+  p2 = Player.find_or_create_by(name: params[:player2])
 
 
   redirect to("/game?p1=#{p1.id}&p2=#{p2.id}")
@@ -26,15 +26,19 @@ post '/log_winner' do
 
   game = Game.create(player1_id: p1_id,
                      player2_id: p2_id,
-                     winner_id: winner_id)
+                     winner_id: winner_id,
+                     game_time: params[:time])
 
   game.id.to_s
 
 end
 
 get '/results' do
-  @p1name = Player.return_name(Game.find(params[:game_id]).player1_id)
-  @p2name = Player.return_name(Game.find(params[:game_id]).player2_id)
-  @winner_name = Player.return_name(Game.find(params[:game_id]).winner_id)
+  @p1name = Player.return_name(Game.find(params[:game_id].to_i).player1_id)
+
+  @p2name = Player.return_name(Game.find(params[:game_id].to_i).player2_id)
+
+  @winner_name = Player.return_name(Game.find(params[:game_id].to_i).winner_id)
+  @time = Game.find(params[:game_id].to_i).game_time
   erb :results
 end
