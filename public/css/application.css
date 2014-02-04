@@ -13,6 +13,7 @@ th {
   color: blue;
   width: 50%;
   border: solid 1px;
+  display: none;
 }
 
 #player1_strip {
