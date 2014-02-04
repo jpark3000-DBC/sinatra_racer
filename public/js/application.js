@@ -34,11 +34,11 @@ $(document).ready(function() {
         if ( items.last().hasClass( "active" ) ) {
           var t1 = new Date().getTime();
           var time = Math.floor((t1-t0)/1000);
-          // console.log(time);
+
           window.alert(p1Name + " is triumphant");
           $.post('/log_winner', {p1: p1Name, p2: p2Name, winner: p1Name, time: time})
             .done(function( gameId ) {
-              // console.log(gameId)
+
               window.location.href="/results?game_id=" + gameId;
           });
         }; // end inner if

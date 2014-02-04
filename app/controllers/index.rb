@@ -34,11 +34,14 @@ post '/log_winner' do
 end
 
 get '/results' do
+  @p1_id = Game.find(params[:game_id].to_i).player1_id
+  @p2_id = Game.find(params[:game_id].to_i).player2_id
   @p1name = Player.return_name(Game.find(params[:game_id].to_i).player1_id)
 
   @p2name = Player.return_name(Game.find(params[:game_id].to_i).player2_id)
 
   @winner_name = Player.return_name(Game.find(params[:game_id].to_i).winner_id)
   @time = Game.find(params[:game_id].to_i).game_time
+
   erb :results
 end
