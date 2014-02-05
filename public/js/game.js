@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
   function Player(name){
     this.name = name;
     this.winningness = false;
@@ -23,14 +23,11 @@ $(document).ready(function(){
 
   Track.prototype.finished = function(){
     return this.track.last().hasClass("active")
-
-  }
+  };
 
 
 
   function Game(name1, name2) {
-    this.name1 = name1.val();
-    this.name2 = name2.val();
     this.track1 = new Track($('.spot'));
     this.track2 = new Track($('.spot2'));
     this.player1 = new Player(name1);
@@ -46,12 +43,13 @@ $(document).ready(function(){
     };
   };
 
-  Game.prototype.reset = function(){
+  Game.prototype.reset = function() {
     this.track1.reset();
     this.track2.reset();
   };
 
-  Game.prototype.winner = function(){
+
+  Game.prototype.winner = function() {
     if (this.track1.finished()) {
       this.player1.winningness = true;
       alert(this.player1.name);
@@ -59,33 +57,36 @@ $(document).ready(function(){
       this.player2.winningness = true;
       alert(this.player2.name);
     };
+  };
 
+  var getPlayerNames = function() {
+    $("#player_names").submit(function(event) {
+      event.preventDefault();
+      $.post("/create_players", $("#player_names").serialize(), function(data) {
+        console.log(data);
+      });
+    });
   };
 
 
-  $("#form").submit(function(e){
-  $("#form").hide();
-  $("#speedway").show();
-    startGame()
-    return false
-});
+  getPlayerNames();
+
+  // var game = new Game('bob', 'rob');
+  // game.create_players();
+  // game.reset()
+
+
+  // $(window).keyup(function(e) {
+  //   game.onKeyUp(event.which);
+  //   game.winner();
+  // });
 
 
 
 
-function startGame(){
-  var game = new Game($("#player1"), $("#player2"));
-  game.reset()
-  $(window).keyup(function(e) {
-    game.onKeyUp(event.which);
-    game.winner();
-  });
 
-}
 
 });
 
-// var input1 = $("#input1").val();
-//         var input2 = $("#input2").val();
 
 
